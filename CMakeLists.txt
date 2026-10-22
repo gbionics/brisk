@@ -34,7 +34,13 @@ add_subdirectory(agast)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/briskConfig.hpp.in "${CMAKE_CURRENT_BINARY_DIR}/include/brisk/briskConfig.hpp" @ONLY)
 
 # Build the brisk library.
-find_package(OpenCV REQUIRED COMPONENTS core features2d)
+find_package(OpenCV REQUIRED)
+if(OpenCV_VERSION VERSION_LESS 5.0)
+  set(OPENCV_FEATURES_COMPONENT features2d)
+else()
+  set(OPENCV_FEATURES_COMPONENT features)
+endif()
+find_package(OpenCV REQUIRED COMPONENTS core ${OPENCV_FEATURES_COMPONENT})
 add_library(brisk
   src/brisk-descriptor-extractor.cc
   src/brisk-feature-detector.cc
