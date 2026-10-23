@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.8...3.16)
 
-find_package(OpenCV REQUIRED COMPONENTS core features2d)
+find_package(OpenCV REQUIRED)
+if(OpenCV_VERSION VERSION_LESS 5.0)
+  set(OPENCV_FEATURES_COMPONENT features2d)
+else()
+  set(OPENCV_FEATURES_COMPONENT features)
+endif()
+find_package(OpenCV REQUIRED COMPONENTS core ${OPENCV_FEATURES_COMPONENT})
 
 add_library(agast
   src/agast5-8-nms.cc  

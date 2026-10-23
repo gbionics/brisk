@@ -54,7 +54,7 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Woverloaded-virtual"
-#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/features2d.hpp>
 #pragma GCC diagnostic pop
 
 namespace cv {
